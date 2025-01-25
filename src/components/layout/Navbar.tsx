@@ -1,25 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import SignInDialog from "../auth/SignInDialog";
+import SignUpDialog from "../auth/SignUpDialog";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
-
-  const handleSignIn = () => {
-    toast({
-      title: "Coming Soon",
-      description: "Sign in functionality will be available soon!",
-    });
-  };
-
-  const handleGetStarted = () => {
-    toast({
-      title: "Coming Soon",
-      description: "Sign up functionality will be available soon!",
-    });
-  };
+  const [isSignInOpen, setIsSignInOpen] = useState(false);
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -68,13 +56,13 @@ const Navbar = () => {
             <Button 
               variant="outline" 
               className="mr-2 hover:scale-105 transition-transform duration-200"
-              onClick={handleSignIn}
+              onClick={() => setIsSignInOpen(true)}
             >
               Sign In
             </Button>
             <Button 
               className="hover:scale-105 transition-transform duration-200"
-              onClick={handleGetStarted}
+              onClick={() => setIsSignUpOpen(true)}
             >
               Get Started
             </Button>
@@ -124,11 +112,14 @@ const Navbar = () => {
             Contact
           </a>
           <div className="px-3 py-2 space-y-2">
-            <Button variant="outline" className="w-full" onClick={handleSignIn}>Sign In</Button>
-            <Button className="w-full" onClick={handleGetStarted}>Get Started</Button>
+            <Button variant="outline" className="w-full" onClick={() => setIsSignInOpen(true)}>Sign In</Button>
+            <Button className="w-full" onClick={() => setIsSignUpOpen(true)}>Get Started</Button>
           </div>
         </div>
       </div>
+
+      <SignInDialog isOpen={isSignInOpen} onOpenChange={setIsSignInOpen} />
+      <SignUpDialog isOpen={isSignUpOpen} onOpenChange={setIsSignUpOpen} />
     </nav>
   );
 };
