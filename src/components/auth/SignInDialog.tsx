@@ -27,7 +27,22 @@ const SignInDialog = ({ isOpen, onOpenChange }: SignInDialogProps) => {
         password,
       });
 
-      if (error) throw error;
+      if (error) {
+        if (error.message.includes("Email not confirmed")) {
+          toast({
+            title: "Email Not Confirmed",
+            description: "Please check your email and confirm your account before signing in.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: "Invalid email or password.",
+            variant: "destructive",
+          });
+        }
+        return;
+      }
 
       toast({
         title: "Success!",
@@ -37,7 +52,7 @@ const SignInDialog = ({ isOpen, onOpenChange }: SignInDialogProps) => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Invalid email or password.",
+        description: "An unexpected error occurred.",
         variant: "destructive",
       });
     } finally {
