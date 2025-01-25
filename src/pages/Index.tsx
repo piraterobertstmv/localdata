@@ -7,7 +7,7 @@ import Contact from "@/components/landing/Contact";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen">
       <Navbar />
       <div className="pt-16">
         <Hero />
@@ -16,7 +16,7 @@ const Index = () => {
         <FAQ />
         <Contact />
       </div>
-    </div>
+    </main>
   );
 };
 
