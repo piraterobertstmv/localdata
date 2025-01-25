@@ -1,4 +1,5 @@
 import { MapPin, FileSpreadsheet, Filter } from "lucide-react";
+import { useInView } from "react-intersection-observer";
 
 const features = [
   {
@@ -19,10 +20,17 @@ const features = [
 ];
 
 const Features = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
-    <div id="features" className="py-24 bg-white">
+    <div id="features" className="py-24 bg-white" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:text-center">
+        <div className={`lg:text-center transition-all duration-700 transform ${
+          inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}>
           <h2 className="text-base text-primary font-semibold tracking-wide uppercase">Features</h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             Everything you need to gather local business data
@@ -34,8 +42,13 @@ const Features = () => {
 
         <div className="mt-20">
           <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
-              <div key={feature.name} className="relative">
+            {features.map((feature, index) => (
+              <div 
+                key={feature.name} 
+                className={`relative transition-all duration-700 delay-${index * 200} transform ${
+                  inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                } hover:scale-105 transition-transform duration-200`}
+              >
                 <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
                   <feature.icon className="h-6 w-6" aria-hidden="true" />
                 </div>
