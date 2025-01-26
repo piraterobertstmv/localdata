@@ -9,16 +9,65 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      search_history: {
+        Row: {
+          created_at: string | null
+          id: string
+          location: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          location: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          location?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_subscriptions: {
+        Row: {
+          created_at: string | null
+          id: string
+          plan: Database["public"]["Enums"]["subscription_plan"] | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          plan?: Database["public"]["Enums"]["subscription_plan"] | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          plan?: Database["public"]["Enums"]["subscription_plan"] | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_monthly_search_count: {
+        Args: {
+          user_id: string
+        }
+        Returns: number
+      }
     }
     Enums: {
-      [_ in never]: never
+      subscription_plan: "starter" | "pro" | "enterprise"
     }
     CompositeTypes: {
       [_ in never]: never
