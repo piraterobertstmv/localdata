@@ -1,17 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
+import SignUpDialog from "@/components/auth/SignUpDialog";
 
 const Hero = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   const handleGetStarted = () => {
-    toast({
-      title: "Coming Soon",
-      description: "Sign up functionality will be available soon!",
-    });
+    setIsSignUpOpen(true);
   };
 
   const handleLearnMore = () => {
@@ -59,6 +57,7 @@ const Hero = () => {
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <div className="h-56 w-full sm:h-72 md:h-96 lg:w-full lg:h-full bg-gradient-to-br from-primary/30 to-secondary/30 animate-fade-in" />
       </div>
+      <SignUpDialog isOpen={isSignUpOpen} onOpenChange={setIsSignUpOpen} />
     </div>
   );
 };
