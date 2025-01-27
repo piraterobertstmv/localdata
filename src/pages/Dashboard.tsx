@@ -32,7 +32,8 @@ const Dashboard = () => {
         const { data: subscriptionData, error: subscriptionError } = await supabase
           .from('user_subscriptions')
           .select('*')
-          .single();
+          .eq('user_id', session.user.id)
+          .maybeSingle();
 
         if (subscriptionError) throw subscriptionError;
 
@@ -41,7 +42,7 @@ const Dashboard = () => {
 
         if (searchCountError) throw searchCountError;
 
-        setSubscription(subscriptionData);
+        setSubscription(subscriptionData || { plan: 'starter' }); // Default to starter if no subscription found
         setSearchCount(searchCountData || 0);
       } catch (error: any) {
         toast({
@@ -83,7 +84,7 @@ const Dashboard = () => {
       <div className="grid gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Current Plan: {subscription?.plan?.toUpperCase()}</CardTitle>
+            <CardTitle>Current Plan: {subscription?.plan?.toUpperCase() || 'STARTER'}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
