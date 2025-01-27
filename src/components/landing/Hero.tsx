@@ -1,11 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SignUpDialog from "@/components/auth/SignUpDialog";
 
 const Hero = () => {
-  const navigate = useNavigate();
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   const handleGetStarted = () => {
