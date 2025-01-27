@@ -38,7 +38,6 @@ export default function BusinessSearch() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`,
           },
           body: JSON.stringify({
             query: businessType,
@@ -53,6 +52,14 @@ export default function BusinessSearch() {
 
       const data = await response.json();
       
+      if (!data || data.length === 0) {
+        toast({
+          title: "No results found",
+          description: "Try adjusting your search terms",
+        });
+        return;
+      }
+
       // Generate CSV
       const csvContent = [
         ['Name', 'Address', 'Phone', 'Website'].join(','),
