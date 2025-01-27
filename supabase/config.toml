@@ -26,5 +26,5 @@ enabled = true
 enabled = true
 
 [[functions]]
-name = "search-businesses"
+[functions.search-businesses]
 verify_jwt = false
