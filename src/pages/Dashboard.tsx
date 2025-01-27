@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/lib/supabase";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import BusinessSearch from "@/components/BusinessSearch";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -95,6 +96,16 @@ const Dashboard = () => {
                 <Progress value={searchProgress} className="h-2" />
               </div>
             </div>
+          </CardContent>
+        </Card>
+        
+        {/* Add BusinessSearch component */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Search Businesses</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <BusinessSearch />
           </CardContent>
         </Card>
       </div>
