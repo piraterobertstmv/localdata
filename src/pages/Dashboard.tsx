@@ -38,8 +38,9 @@ const Dashboard = () => {
 
         if (subscriptionError) throw subscriptionError;
 
+        // Updated to use p_user_id instead of user_id to match the function definition
         const { data: searchCountData, error: searchCountError } = await supabase
-          .rpc('get_monthly_search_count', { user_id: session.user.id });
+          .rpc('get_monthly_search_count', { p_user_id: session.user.id });
 
         if (searchCountError) throw searchCountError;
 
@@ -99,7 +100,6 @@ const Dashboard = () => {
           </CardContent>
         </Card>
         
-        {/* Add BusinessSearch component */}
         <Card>
           <CardHeader>
             <CardTitle>Search Businesses</CardTitle>

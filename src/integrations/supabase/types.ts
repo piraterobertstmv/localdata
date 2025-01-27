@@ -61,7 +61,7 @@ export type Database = {
     Functions: {
       get_monthly_search_count: {
         Args: {
-          user_id: string
+          p_user_id: string
         }
         Returns: number
       }
